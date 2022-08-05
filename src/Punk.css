@@ -1,0 +1,19 @@
+.posts-container {
+  padding: 0 8rem;
+}
+.main-table {
+  border-bottom: 2px solid black;
+  width: 100%;
+}
+.main-table th {
+  padding: 1rem 0;
+}
+.inner-table {
+  width: 100%;
+}
+.inner-table tr td {
+  padding: 20px 20px;
+}
+.inner-table td img {
+  width: 40px;
+}
