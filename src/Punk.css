@@ -17,3 +17,18 @@
 .inner-table td img {
   width: 40px;
 }
+nav {
+  padding: 3rem 8rem;
+}
+nav li {
+  list-style-type: none;
+  display: inline;
+}
+nav a {
+  text-decoration: none;
+  margin-left: 3rem;
+  padding: 10px;
+  color: white;
+  font-size: 18px;
+  background-color: #6195a3;
+}

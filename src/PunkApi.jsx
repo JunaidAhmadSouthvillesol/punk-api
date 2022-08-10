@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import './Punk.css';
 const PunkApi = () => {
     const [posts, setPosts] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postPerPage] = useState(25);
+
+
+    // api data show detail
     useEffect(() => {
         async function allPages() {
             for (let x = 1; x <= 13; x++) {
@@ -16,7 +21,15 @@ const PunkApi = () => {
             }
         } allPages()
     }, []);
+    // only get current posts on page to show data 25
+    const last = currentPage * postPerPage;
+    const first = last - postPerPage;
+    const current = posts.slice(first, last);
 
+    const pagination = [];
+    for (let i = 1; i <= (posts.length / postPerPage); i++) {
+        pagination.push(i);
+    }
     return (
         <>
             <div className="posts-container">
@@ -34,7 +47,7 @@ const PunkApi = () => {
                         </tr>
                     </thead>
                 </table>
-                {posts.map((post) => {
+                {current.map((post) => {
                     return (
                         <>
                             <table key={post.id} className="inner-table">
@@ -55,6 +68,17 @@ const PunkApi = () => {
                     );
                 })}
             </div>
+            <nav>
+                <ul className='pagination'>
+                    {pagination.map(number => (
+                        <li key={number}>
+                            <a onClick={() => setCurrentPage(number)} href='!#'>
+                                {number}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </nav>
         </>
     );
 };
