@@ -3,15 +3,18 @@ import './Punk.css';
 const PunkApi = () => {
     const [posts, setPosts] = useState([]);
     useEffect(() => {
-        fetch('https://api.punkapi.com/v2/beers?page=2')
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-                setPosts(data);
-            })
-            .catch((err) => {
-                console.log(err.message);
-            });
+        async function allPages() {
+            for (let x = 1; x <= 13; x++) {
+                await fetch(`https://api.punkapi.com/v2/beers?page=${x}`)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        setPosts((prev) => [...prev, ...data])
+                    })
+                    .catch((err) => {
+                        console.log(err.message);
+                    });
+            }
+        } allPages()
     }, []);
 
     return (
@@ -34,7 +37,7 @@ const PunkApi = () => {
                 {posts.map((post) => {
                     return (
                         <>
-                            <table key={post.key} className="inner-table">
+                            <table key={post.id} className="inner-table">
                                 <tbody>
                                     <tr>
                                         <td>{post.id}</td>
