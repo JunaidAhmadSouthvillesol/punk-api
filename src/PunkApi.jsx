@@ -5,7 +5,6 @@ const PunkApi = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [postPerPage] = useState(25);
 
-
     // api data show detail
     useEffect(() => {
         async function allPages() {
@@ -22,12 +21,14 @@ const PunkApi = () => {
         } allPages()
     }, []);
     // only get current posts on page to show data 25
-    const last = currentPage * postPerPage;
-    const first = last - postPerPage;
-    const current = posts.slice(first, last);
+    const end = currentPage * postPerPage;
+    const start = end - postPerPage;
+    // const current = posts.slice(0, 25);
+    const current = posts.slice(start, end);
 
     const pagination = [];
     for (let i = 1; i <= (posts.length / postPerPage); i++) {
+        console.log(325 / 25);
         pagination.push(i);
     }
     return (
@@ -50,7 +51,7 @@ const PunkApi = () => {
                 {current.map((post) => {
                     return (
                         <>
-                            <table key={post.id} className="inner-table">
+                            <table key={post} className="inner-table">
                                 <tbody>
                                     <tr>
                                         <td>{post.id}</td>
